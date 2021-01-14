@@ -4,10 +4,14 @@ import { ITodo } from "../../types/types";
 interface ITodoItem {
   todo: ITodo;
   deleteTodo: (arg0: string) => void;
+  navigation: any;
 }
-const TodoItem: React.FC<ITodoItem> = ({ todo, deleteTodo }) => {
+const TodoItem: React.FC<ITodoItem> = ({ todo, deleteTodo, navigation }) => {
   return (
-    <TouchableOpacity activeOpacity={0.5}>
+    <TouchableOpacity
+      onPress={()=> navigation.navigate('Todo', {todo: todo})}
+      activeOpacity={0.5}
+    >
       <View style={styles.todo}>
         <Text>{todo.text}</Text>
         <View style={styles.timeWrapper}>
@@ -42,11 +46,11 @@ const styles = StyleSheet.create({
   time: {
     fontSize: 14,
     fontWeight: "600",
-    color: '#4294ff',
+    color: "#4294ff",
     lineHeight: 32,
     width: 70,
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
 
 export default TodoItem;
